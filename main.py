@@ -46,6 +46,10 @@ class NeuralNetwork:
 
     def set_input(self, input_values):
         self.outputs[0] = np.append(input_values, 1)
+
+    def get_output(self):
+        # returns last layer except bias node
+        return self.outputs[-1][:-1]
     
     def propagate(self):
         for l in range(self.number_of_layers - 1):
@@ -78,9 +82,9 @@ class NeuralNetwork:
             print(self.outputs[l])
 
 
-
 INPUTS, OUTPUTS = readTrainingData('training.txt')
 
 NN = NeuralNetwork([2, 2, 1])
 NN.set_input(INPUTS[3])
 NN.propagate()
+print(NN.get_output())
